@@ -1,23 +1,110 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <title>My Website</title>
+  <style>
+    div.screen {border: 5px black solid; height:80vh; display:none;}
+
+    #div1 {background-color: #D7CEC7;}
+    
+    #div2 {background-color: peachpuff;}
+
+    #div3 {background-color: blueviolet;
+          color: white}
+    
+    #div4 {background-color: greenyellow;}
+
+    
+  </style>
+
+
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
+  <header>
+  <a href="" data-screen="div1">Page 1</a>
+  <a href="" data-screen="div2">Page 2</a>
+  <a href="" data-screen="div3">Page 3</a>
+  <a href="" data-screen="div4">Page 4</a>
+  </header>
+  
+  <div id="div1" class="screen">
+    This page shows a map of Chicago. We can drag around the screen and see the rest of the world as well.
+    <p>
+    <html>
+  <style>
+  #map {
+    height: 85%;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+  <head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
- <!--
-  This script places a badge on your repl's full-browser view back to your repl's cover
-  page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
-  teal, blue, blurple, magenta, pink!
-  -->
-  <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script> 
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq2Xy4Wy1EmwwN5C7h_s4uaH4Ar-RlLjI&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+<script>
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 41.8781, lng: -87.6298 },
+    zoom: 8,
+  });
+}
+</script>
+</html>
+
+    
+  </div>
+    
+  <div id="div2" class="screen">
+    Page Two
+    <p>
+    <div>
+      hello
+    </div>
+  </div>
+
+  <div id="div3" class="screen">
+    Page Three
+    <p>
+    <div>
+      hello
+    </div>
+  </div>
+
+  <div id="div4" class="screen">
+    Page Four
+    <p>
+    <div>
+      hello
+    </div>
+  </div>
+
+  <script>
+    document.querySelector("#div1").style.display = "block";
+    document.querySelectorAll("a").forEach( item => {
+      item.addEventListener("click", (event) => {
+        event.preventDefault();
+        let screen = event.target.getAttribute("data-screen");
+        console.log(screen);
+        document.querySelectorAll("div.screen").forEach( screen => screen.style.display = "none")
+        document.querySelector("#" + screen).style.display = "block";
+      })
+  })
+    
+</script>
+  
 </body>
-
 </html>
