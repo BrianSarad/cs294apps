@@ -27,7 +27,7 @@
   </header>
   
   <div id="div1" class="screen">
-    This page shows a map of Chicago. We can drag around the screen and see the rest of the world as well.
+    <p>This page shows a map of Chicago. We can drag around the screen and see the rest of the world as well.</p>
     <p></p>
   <style>
   #map {
@@ -66,10 +66,10 @@ function initMap() {
   </div>
     
   <div id="div2" class="screen">
-    Page Two
+    <p>Tonights Weather Forecast:</p>
     <p1>
   <style>
-    img {height: 10%;}
+    img {height: 50%;}
   </style>
       <p></p>
 <script>
@@ -83,23 +83,22 @@ function initMap() {
             })
       .then ((data) => {
         console.log(data)
-        data.properties.periods.forEach((record) => {
         let div = document.createElement("div");
         div2.append(div);        //change here
-        div.innerHTML = (record.name + "<br>" + record.detailedForecast);
+        div.innerHTML = (data.properties.periods[0].name + "<br>" + data.properties.periods[0].detailedForecast);
         var x = document.createElement("IMG");
-        x.setAttribute("src", record.icon);
+        x.setAttribute("src", data.properties.periods[0].icon);
         x.setAttribute("alt", "icon");
         div2.appendChild(x); //change here
-        })
+        
       })
   
 </script>
   </div>
 
   <div id="div3" class="screen">
-    Page Three
-    <p>
+    <p>Type in the pokemon you wish to see...</p>
+    <p></p>
     <div>
       <script>
         // Set up the input field
@@ -159,10 +158,36 @@ searchButton.addEventListener('click', searchPokemon);
   </div>
 
   <div id="div4" class="screen">
-    Page Four
-    <p>
+    <p>Captures your picture and squeezes it</p>
+    <p></p>
     <div>
-      hello
+      <!-- Sets up the video element -->
+<video id="video" autoplay muted></video>
+<!-- Sets up the canvas element -->
+<canvas id="canvas"></canvas>
+<!-- Sets up the capture button -->
+<button id="capture">Capture Photo</button>
+<script>
+  // Sets up the video element
+  const video = document.getElementById('video');
+  // Sets up the canvas element
+  const canvas = document.getElementById('canvas');
+  // Sets up the capture button
+  const captureButton = document.getElementById('capture');
+  // Sets up the video stream
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      video.srcObject = stream;
+    });
+  // Sets up the photo capture function
+  const capturePhoto = () => {
+    const context = canvas.getContext('2d');
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  }
+  // Adds an event listener to the capture button
+  captureButton.addEventListener('click', capturePhoto);
+</script>
+
     </div>
   </div>
 
